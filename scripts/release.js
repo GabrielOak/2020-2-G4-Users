@@ -6,7 +6,7 @@ require('dotenv').config()
 
 const { SONAR_URL } = require('./consts.js')
 
-const {TOKEN, RELEASE_MINOR} = process.env;
+const { TOKEN, RELEASE_MINOR } = process.env;
 
 const octokit = new Octokit({ auth: TOKEN});
 
@@ -21,8 +21,13 @@ const getLatestRelease = async () => {
 const newTagName = async () => {
   let oldTag = await getLatestRelease()
   oldTag = oldTag.split('.')
-  const tagNum = parseInt(oldTag[1]) + 1
-  return oldTag[0] + '.' + tagNum
+  if(RELEASE_MINOR === 'true'){
+    const tagNum = parseInt(oldTag[1]) + 1
+    return oldTag[0] + '.' + tagNum + '.0'
+  } else {
+    const tagNum = parseInt(oldTag[2]) + 1
+    return oldTag[0] + '.' + oldTag[1] + '.' + tagNum
+  }
 }
 
 const createRelease = async () => {
@@ -59,11 +64,8 @@ const uploadSonarFile = async (upload_url) => {
 }
 
 const script = async () => {
-  console.log(RELEASE_MINOR)
   const release = await createRelease()
   await uploadSonarFile(release)
 }
 
 script()
-
-
