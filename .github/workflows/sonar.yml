@@ -7,19 +7,19 @@ on:
 jobs:
   release:
     if: github.event.pull_request.merged == true
-      name: "Release"
-      runs-on: "ubuntu-latest"
+    name: "Release"
+    runs-on: "ubuntu-latest"
 
-      steps:
-      - run: cd scripts
-      - name: Create .env file
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          envkey_URL: ${{ secrets.URL }}
-          envkey_RELEASE_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'Minor') }}
+    steps:
+    - run: cd scripts
+    - name: Create .env file
+      uses: SpicyPizza/create-envfile@v1
+      with:
+        envkey_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        envkey_URL: ${{ secrets.URL }}
+        envkey_RELEASE_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'Minor') }}
       
-        - name: Create Release
-        - run: yarn install
-        - run: node release.js
+    - name: Create Release
+    - run: yarn install
+    - run: node release.js
 
