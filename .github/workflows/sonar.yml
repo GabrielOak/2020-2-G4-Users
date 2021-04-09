@@ -1,8 +1,8 @@
 name: Release
 
-on:
-  pull_request:
-    types: [ closed ]
+on: [ push ]
+  #pull_request:
+  #  types: [ closed ]
     
 jobs:
   release:
@@ -11,16 +11,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: cd scripts
     - name: Create .env file
       uses: SpicyPizza/create-envfile@v1
       with:
         envkey_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         envkey_URL: ${{ secrets.URL }}
         envkey_RELEASE_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'Minor') }}
+        directory: scripts
       
     - name: Install packages
-      run: yarn install
+      run: cd scripts && yarn install
   
     - name: Create Release
       run: node release.js
