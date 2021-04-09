@@ -17,7 +17,6 @@ jobs:
       run: |
           touch ./scripts/.env
           echo TOKEN=${{ secrets.ACCESS_TOKEN }} >> ./scripts/.env
-          echo URL=${{ secrets.URL }} >> ./scripts/.env
           echo RELEASE_MINOR=${{ contains(github.event.pull_request.labels.*.name, 'Minor') }} >> ./scripts/.env
   
     - name: Create Release

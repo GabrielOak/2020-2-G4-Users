@@ -4,7 +4,9 @@ const axios = require('axios')
 const fs = require('fs')
 require('dotenv').config()
 
-const {TOKEN, URL, RELEASE_MINOR} = process.env;
+const { SONAR_URL } = require('./consts.js')
+
+const {TOKEN, RELEASE_MINOR} = process.env;
 
 const octokit = new Octokit({ auth: TOKEN});
 
@@ -35,7 +37,7 @@ const createRelease = async () => {
 }
 
 const saveSonarFile = async () => {
-  await axios.get(URL)
+  await axios.get(SONAR_URL)
     .then((res) => {
       fs.writeFileSync('/tmp/sonar.json', JSON.stringify(res.data))
     })
