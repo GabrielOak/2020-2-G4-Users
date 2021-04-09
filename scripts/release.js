@@ -2,6 +2,7 @@ const { Octokit } = require("@octokit/core")
 const ghReleaseAssets = require('gh-release-assets')
 const axios = require('axios')
 const fs = require('fs')
+require('dotenv').config()
 
 const {TOKEN, URL, RELEASE_MINOR} = process.env;
 
