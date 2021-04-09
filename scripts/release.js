@@ -4,9 +4,9 @@ const axios = require('axios')
 const fs = require('fs')
 require('dotenv').config()
 
-const {TOKEN, URL, RELEASE_MINOR} = process.env;
+const {envkey_TOKEN, envkey_URL, envkey_RELEASE_MINOR} = process.env;
 
-const octokit = new Octokit({ auth: TOKEN});
+const octokit = new Octokit({ auth: envkey_TOKEN});
 // const github = new GitHub(TOKEN);
 
 const getLatestRelease = async () => {
@@ -36,7 +36,7 @@ const createRelease = async () => {
 }
 
 const saveSonarFile = async () => {
-  await axios.get(URL)
+  await axios.get(envkey_URL)
     .then((res) => {
       fs.writeFileSync('/tmp/sonar.json', JSON.stringify(res.data))
     })
@@ -46,7 +46,7 @@ const uploadSonarFile = async (upload_url) => {
   await saveSonarFile()
   ghReleaseAssets({
     url: upload_url,
-    token: [TOKEN],
+    token: [envkey_TOKEN],
     assets: [
       '/tmp/sonar.json',
       {
@@ -58,7 +58,7 @@ const uploadSonarFile = async (upload_url) => {
 }
 
 const script = async () => {
-  console.log(RELEASE_MINOR)
+  console.log(envkey_RELEASE_MINOR)
   const release = await createRelease()
   await uploadSonarFile(release)
 }
