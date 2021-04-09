@@ -21,10 +21,7 @@ jobs:
         # envkey_RELEASE_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'Minor') }}
         envkey_RELEASE_MINOR: "oi"
         directory: scripts
-      
-    - name: Install packages
-      run: cd scripts && yarn install
   
     - name: Create Release
-      run: node release.js
+      run: cd scripts && yarn install && node release.js
 
