@@ -23,13 +23,12 @@ jobs:
 #         directory: ./scripts
 #         file_name: .env
     - name: Create env file
-    #
+    #echo envkey_TOKEN=${{ secrets.ACCESS_TOKEN }} >> ./scripts/.env
       run: |
           touch ./scripts/.env
           echo envkey_URL=${{ secrets.URL }} >> ./scripts/.env
-          echo envkey_TOKEN=${{ secrets.ACCESS_TOKEN }} >> ./scripts/.env
           echo envkey_RELEASE_MINOR="oioi" >> ./scripts/.env
-          cat .env
+          cat ./scripts/.env
   
     - name: Create Release
       run: cd scripts && yarn install && node release.js
