@@ -19,7 +19,9 @@ jobs:
         envkey_URL: ${{ secrets.URL }}
         envkey_RELEASE_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'Minor') }}
       
+    - name: Install packages
+      run: yarn install
+  
     - name: Create Release
-    - run: yarn install
-    - run: node release.js
+      run: node release.js
 
