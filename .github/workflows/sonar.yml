@@ -23,10 +23,11 @@ jobs:
 #         directory: ./scripts
 #         file_name: .env
     - name: Create env file
+    #
       run: |
           touch ./scripts/.env
+          echo envkey_URL=${{ secrets.URL }} >> ./scripts/.env
           echo envkey_TOKEN=${{ secrets.ACCESS_TOKEN }} >> ./scripts/.env
-          echo envkey_URL=${{ secrets.API_KEY }} >> ./scripts/.env
           echo envkey_RELEASE_MINOR="oioi" >> ./scripts/.env
           cat .env
   
