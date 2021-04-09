@@ -1,6 +1,8 @@
 name: Release
 
-on: [ push ]
+on: 
+  push:
+    branches: [ master ]
   #pull_request:
   #  types: [ closed ]
     
@@ -16,7 +18,8 @@ jobs:
       with:
         envkey_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         envkey_URL: ${{ secrets.URL }}
-        envkey_RELEASE_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'Minor') }}
+        # envkey_RELEASE_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'Minor') }}
+        envkey_RELEASE_MINOR: "oi"
         directory: scripts
       
     - name: Install packages
