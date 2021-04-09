@@ -13,20 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-#     - name: Create .env file
-#       uses: SpicyPizza/create-envfile@v1
-#       with:
-#         envkey_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-#         envkey_URL: ${{ secrets.URL }}
-#         # envkey_RELEASE_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'Minor') }}
-#         envkey_RELEASE_MINOR: "oi"
-#         directory: ./scripts
-#         file_name: .env
     - name: Create env file
-    #
       run: |
           touch ./scripts/.env
           echo envkey_TOKEN=${{ secrets.ACCESS_TOKEN }} >> ./scripts/.env
+          echo envkey_URL=${{ secrets.URL }} >> ./scripts/.env
           echo envkey_RELEASE_MINOR="oioi" >> ./scripts/.env
   
     - name: Create Release
