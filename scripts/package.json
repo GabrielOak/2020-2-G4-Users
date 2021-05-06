@@ -8,6 +8,8 @@
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "fs": "^0.0.1-security",
-    "gh-release-assets": "^2.0.0"
+    "gh-release-assets": "^2.0.0",
+    "moment": "^2.29.1",
+    "octokit-commit-multiple-files": "^3.2.1"
   }
 }
